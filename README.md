@@ -1,24 +1,16 @@
-# README
+# Threee
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 開発環境
 
-Things you may want to cover:
+OS: Ubuntu 20.0.5 LTS(linux)
+Ruby: 3.0.1
+rails: 6.1.0.1 
+postgreSQL: 12.11
 
-* Ruby version
 
-* System dependencies
+### 実装するために取り入れた技術
+gem devise
+AWS
+Docker
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
