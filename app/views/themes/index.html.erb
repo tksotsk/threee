@@ -2,6 +2,10 @@
 
 <h1>Themes</h1>
 
+<% if current_user.admin? %>
+  <p>(Adminユーザー)</p>
+<% end %>
+
 <table>
   <thead>
     <tr>

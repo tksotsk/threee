@@ -14,6 +14,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'devise-i18n'
 gem 'rexml'
+gem 'rails_admin'
+gem 'cancancan'
 
 
 group :development, :test do
