@@ -47,14 +47,16 @@ $ rails db:seed
 [テーブル設計](https://docs.google.com/spreadsheets/d/1I1Mqas3ASfcJlIj7kvU6YFLQU4QeYGiUhzhBrwdFyXM/edit#gid=2020033787)
 
 ### ER図　
+[draw.ioリンク](https://app.diagrams.net/#G1pPakd0fUbVZ4UK1tV-YbZVPlK6bzi6IT)
+
 ![ER図](docs/threee_er.drawio.png)
 
 ### ワイヤーフレーム
-draw.ioリンク
+[draw.ioリンク](https://app.diagrams.net/#G1q8UaTubNaPJ16_H5tyf_LQrpzCy8IiA9)
 ![ワイヤーフレーム](docs/threee_wf.drawio.png)
 
 
 
 ### 画面遷移図
-draw.ioリンク
+[draw.ioリンク](https://app.diagrams.net/#G1rOA4HsE6aOyyyzVkuNktfGha3Ry7KlLi)
 ![画面遷移図](docs/threee_st.drawio.png)
