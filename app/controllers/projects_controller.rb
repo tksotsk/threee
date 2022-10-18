@@ -10,9 +10,11 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
+    
     respond_to do |format|
       if @project.save
-        format.html { redirect_to projects_url, notice: "Project was successfully created." }
+        @theme = Theme.new(project_id: @project.id)
+        format.html { redirect_to new_project_theme_path(@project.id), notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
