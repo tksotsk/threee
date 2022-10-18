@@ -14,8 +14,9 @@ class ThemesTest < ApplicationSystemTestCase
     visit themes_url
     click_on "New Theme"
 
-    fill_in "Content", with: @theme.content
-    fill_in "Theme", with: @theme.theme
+    fill_in "First theme", with: @theme.first_theme
+    fill_in "Second theme", with: @theme.second_theme
+    fill_in "Third theme", with: @theme.third_theme
     click_on "Create Theme"
 
     assert_text "Theme was successfully created"
@@ -26,8 +27,9 @@ class ThemesTest < ApplicationSystemTestCase
     visit themes_url
     click_on "Edit", match: :first
 
-    fill_in "Content", with: @theme.content
-    fill_in "Theme", with: @theme.theme
+    fill_in "First theme", with: @theme.first_theme
+    fill_in "Second theme", with: @theme.second_theme
+    fill_in "Third theme", with: @theme.third_theme
     click_on "Update Theme"
 
     assert_text "Theme was successfully updated"
