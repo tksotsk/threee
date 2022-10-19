@@ -1,4 +1,4 @@
-<%= form_with(model: theme, url: project_themes_path) do |form| %>
+<%= form_with(model: theme) do |form| %>
   <% if theme.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
@@ -10,36 +10,40 @@
       </ul>
     </div>
   <% end %>
-<div>
-
-<ul>
-<li>
-<h3>
-  <div class="field">
-    <%= form.text_field :first_theme ,class: "theme_field"%>
+  <div>
+  
+    <ul>
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :first_theme ,class: "theme_field"%>
+        </div>
+      
+      </h3>
+      </li>
+      
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :second_theme ,class: "theme_field"%>
+        </div>
+      
+      </h3>
+      </li>
+      
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :third_theme  ,class: "theme_field"%>
+        </div>
+      </h3>
+      </li>
+      
+    </ul>
   </div>
-
-</h3>
-</li>
-
-<li>
-<h3>
-  <div class="field">
-    <%= form.text_field :second_theme ,class: "theme_field"%>
+  
+  <div class="actions">
+    <%= form.submit %>
   </div>
-
-</h3>
-</li>
-
-<li>
-<h3>
-  <div class="field">
-    <%= form.text_field :third_theme  ,class: "theme_field"%>
-  </div>
-</h3>
-</li>
-
-</ul>
-</div>
 
 <% end %>

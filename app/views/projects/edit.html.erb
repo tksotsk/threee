@@ -1,2 +1,42 @@
-<h1>Projects#edit</h1>
-<p>Find me in app/views/projects/edit.html.erb</p>
+<p id="notice"><%= notice %></p>
+<div class="field">
+<h1>Projects</h1>
+
+<table class="field">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+      <th>date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody style="color: #bbb;">
+    <% @projects.each do |project| %>
+      <tr>
+        <% if @project.id==project.id %>
+            <%= form_with(model: @project) do |form| %>
+              <div class="field">
+                <td><%= form.text_field :title, class: "theme_field" %></td>
+                <td><%= form.submit %></td>
+              </div>
+            <% end %>
+        <% else %>
+          <td><%= project.title %></td>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <% end %>
+        <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+        <td><%= link_to 'Main', project %></td>
+        <td><%= link_to 'List', project_themes_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
+
+</div>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root 'pages#top'
+  get 'top', to: 'pages#top', as: :top 
   resources :projects, shallow: true do
     resources :themes
   end

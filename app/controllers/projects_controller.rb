@@ -29,6 +29,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @projects = Project.all
   end
 
   def update

@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<div class="field">
 <h1>Projects</h1>
 
-<table>
+<table class="field">
   <thead>
     <tr>
       <th>Title</th>
+      <th>date</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -14,8 +15,8 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.title %></td>
+        <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
         <td><%= link_to 'List', project_themes_path(project) %></td>
-        <td><%= link_to 'New', new_project_theme_path(project) %></td>
         <td><%= link_to 'Main', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +28,5 @@
 <br>
 
 <%= link_to 'New Project', new_project_path %>
+
+</div>
