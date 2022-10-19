@@ -19,7 +19,7 @@
         <td><%= theme.second_theme %></td>
         <td><%= theme.third_theme %></td>
         <td><%= link_to 'Show', theme %></td>
-        <td><%= link_to 'Edit', edit_project_theme_path(theme) %></td>
+        <td><%= link_to 'Edit', edit_theme_path(theme) %></td>
         <td><%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Theme', new_project_theme_path %>
+<%= link_to 'New Theme', new_project_theme_path(@project) %>

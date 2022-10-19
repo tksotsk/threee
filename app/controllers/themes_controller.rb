@@ -3,16 +3,20 @@ class ThemesController < ApplicationController
 
   # GET /themes or /themes.json
   def index
+    @project = Project.find(params[:project_id])
     @themes = Theme.all
   end
 
   # GET /themes/1 or /themes/1.json
   def show
+    @project = Project.find(params[:project_id])
   end
 
   # GET /themes/new
   def new
-    @theme = Theme.new
+    
+    @project = Project.find(params[:project_id])
+    @theme = Project.find(params[:project_id]).themes.order(created_at: :desc).first.dup
   end
 
   # GET /themes/1/edit
@@ -21,11 +25,12 @@ class ThemesController < ApplicationController
 
   # POST /themes or /themes.json
   def create
-    @theme = Theme.new(theme_params)
+    @project = Project.find(params[:project_id])
+    @theme = @project.themes.new(theme_params)
 
     respond_to do |format|
       if @theme.save
-        format.html { redirect_to project_theme_path(@theme), notice: "Theme was successfully created." }
+        format.html { redirect_to project_path(@project), notice: "Theme was successfully created." }
         format.json { render :show, status: :created, location: @theme }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -62,7 +67,7 @@ class ThemesController < ApplicationController
   def set_theme
     @theme = Theme.find(params[:id])
   end
-  # Only allow a list of trusted parameters through.
+
   def theme_params
     params.require(:theme).permit(:first_theme, :second_theme, :third_theme)
   end

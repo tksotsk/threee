@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<%= link_to 'New Theme', new_project_theme_path(@theme.project) %>
+<h2><%= @project.title %></h2>
+
+
+<ul>
+<li>
+<h3>
+  <div class="field">
+    <%= @theme.first_theme %>
+  </div>
+</h3>
+</li>
+
+<li>
+<h3>
+  <div class="field">
+    <%= @theme.second_theme %>
+  </div>
+</h3>
+</li>
+
+<li>
+<h3>
+  <div class="field">
+    <%= @theme.third_theme %>
+  </div>
+</h3>
+</li>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

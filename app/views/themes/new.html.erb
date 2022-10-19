@@ -1,5 +1,9 @@
-<h1>New Theme</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form', theme: @project.theme %>
+<%= link_to 'Back', project_path(@project) %>
 
-<%= link_to 'Back', project_themes_path %>
+<h2><%= @project.title %></h2>
+
+
+<%= render 'form', theme: @theme %>
+
