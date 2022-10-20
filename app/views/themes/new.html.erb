@@ -1,0 +1,26 @@
+
+
+
+<div class="field center">
+<%= link_to '現在のテーマ', theme_path(@now_theme) %>
+</div>
+<div class="field center">
+  <h2><%= @project.title %></h2>
+</div>
+
+
+
+<p>
+  <div class="field center">
+    <%= @now_theme.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %>
+  </div>
+</p>
+
+<div class="field cenetr">
+  前へ|
+  次へ
+</div>
+
+
+<%= render 'form', {theme: @theme, project: @project} %>
+

@@ -1,0 +1,30 @@
+
+<div class="field">
+<h1>履歴</h1>
+<table class="field">
+  <thead>
+    <tr>
+      <th>テーマ　①</th>
+      <th>テーマ　②</th>
+      <th>テーマ　③</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @themes.each do |theme| %>
+      <tr>
+        <td><%= theme.first_theme %></td>
+        <td><%= theme.second_theme %></td>
+        <td><%= theme.third_theme %></td>
+        <td><%= theme.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+        <td><%= link_to '詳細', theme_path(theme) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Theme', new_project_theme_path(@project) %>
+</div>

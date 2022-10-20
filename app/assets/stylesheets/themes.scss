@@ -1,0 +1,27 @@
+// Place all the styles related to the Themes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.field {
+    width: 100%;
+    text-align:center;
+    color: #666;
+}
+.theme_field {
+    width: 100%;
+    color: #bbb;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    text-align:center
+}
+.theme_field:hover {
+    width: 100%;
+    color: #888;
+    background-color: aliceblue;
+}
+
+input[type=text]:focus {
+    caret-color: rgb(134, 80, 80);
+    color: rgb(134, 80, 80);
+    border: none;
+}

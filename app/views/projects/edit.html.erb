@@ -1,0 +1,42 @@
+
+<div class="field">
+<h1>Projects</h1>
+
+<%= form_with(model: @project) do |form| %>
+
+<table class="field">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th colspan="2"></th>
+      <th>作成日時</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <% if @project.id==project.id %>
+          <div class="field">
+            <td><%= form.text_field :title, class: "theme_field" %></td>
+            <td><%= form.submit %></td>
+          </div>
+        <% else %>
+          <td style="color: #bbb;"><%= project.title %></td>
+          <td><%= link_to '名前を編集する', edit_project_path(project) %></td>
+        <% end %>
+        <td><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+        <td><%= link_to '３つのテーマ', project %></td>
+        <td><%= link_to '履歴', project_themes_path(project) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+<%= link_to 'New Project', new_project_path %>
+
+</div>
