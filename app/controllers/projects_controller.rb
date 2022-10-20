@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @projects = Project.all
+    @projects = current_user.projects.order(created_at: :desc).includes(:user, :themes)
   end
 
   def update
