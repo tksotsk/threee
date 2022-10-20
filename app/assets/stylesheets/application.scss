@@ -54,6 +54,11 @@ a:hover {
 #notice {
   color: green; }
 
+  .field_with_errors {
+    padding: 2px;
+    background-color: rgb(255, 81, 47); }
+  
+
 #error_explanation {
   width: 100%;
   border: 2px solid rgb(254, 217, 217);

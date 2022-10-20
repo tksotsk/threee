@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.build(project_params)
-    
+    @theme = @project.themes.order(created_at: :desc).first
     respond_to do |format|
       if @project.save
         format.html { redirect_to projects_path, notice: "Project was successfully created." }
