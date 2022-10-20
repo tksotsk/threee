@@ -2,11 +2,15 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects.order(created_at: :desc).includes(:user, :themes)
   end
 
   def show
-    @theme=@project.themes.order(created_at: :desc).first
+    @themes = @project.themes.order(created_at: :desc)
+    @theme = @themes.first
+    @theme_ids = @themes.map{|t| t.id }
+    @back_id = @theme_ids[@theme_ids.index(@theme.id)+1]
+    @next_id = @theme_ids[@theme_ids.index(@theme.id)-1]
   end
 
   def new
@@ -33,6 +37,15 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html { redirect_to projects_path, notice: "Project was successfully updated." }
+        format.json { render :show, status: :ok, location: @theme }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @theme.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
