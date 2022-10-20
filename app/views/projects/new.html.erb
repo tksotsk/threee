@@ -12,10 +12,41 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <h2><%= form.text_field :title ,class: "theme_field", placeholder: "プロジェクト名" %></h2>
   </div>
 
+  <%= form.fields_for :themes do | form | %>
+
+
+    <ul>
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :first_theme ,class: "theme_field", placeholder: "テーマ　①"%>
+        </div>
+      
+      </h3>
+      </li>
+      
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :second_theme ,class: "theme_field", placeholder: "テーマ　②"%>
+        </div>
+      
+      </h3>
+      </li>
+      
+      <li>
+      <h3>
+        <div class="field">
+          <%= form.text_field :third_theme  ,class: "theme_field", placeholder: "テーマ　③"%>
+        </div>
+      </h3>
+      </li>
+      
+    </ul>
+  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

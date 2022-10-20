@@ -1,6 +1,23 @@
-<h1>Editing Theme</h1>
 
-<%= render 'form', theme: @theme %>
 
-<%= link_to 'Show', @theme %> |
-<%= link_to 'Back', themes_path %>
+<div class="field center">
+<%= link_to '現在のテーマ', theme_path(@theme) %>
+</div>
+<div class="field center">
+  <h2><%= @theme.project.title %></h2>
+</div>
+
+<p>
+  <div class="field center">
+    <%= @theme.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %>
+  </div>
+</p>
+<div class="field cenetr">
+  前へ|
+  次へ
+</div>
+
+
+
+<%= render 'form', {theme: @theme, project: @theme.project} %>
+

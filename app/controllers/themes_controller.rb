@@ -1,31 +1,42 @@
 class ThemesController < ApplicationController
-  before_action :set_theme, only: %i[ show edit update destroy ]
+  before_action :set_theme, only: %i[ show edit update ]
 
-  # GET /themes or /themes.json
   def index
-    @themes = Theme.all
+    @project = Project.find(params[:project_id])
+    @themes = @project.themes.order(created_at: :desc)
   end
 
-  # GET /themes/1 or /themes/1.json
-  def show
-  end
-
-  # GET /themes/new
   def new
-    @theme = Theme.new
+    @project = Project.find(params[:project_id])
+    @now_theme = @project.themes.order(created_at: :desc).first
+    @theme = Project.find(params[:project_id]).themes.order(created_at: :desc).first.dup
   end
 
-  # GET /themes/1/edit
+  def show
+    @themes = @theme.project.themes.order(created_at: :desc)
+    @now_theme = @themes.first
+    @theme_ids = @themes.map{|t| t.id }
+    @theme_ids_num = @theme_ids.index(@theme.id)
+    @back_id = @theme_ids[@theme_ids.index(@theme.id)+1]
+    @next_id = @theme_ids[@theme_ids.index(@theme.id)-1]
+    @back_id ||= @theme_ids[@theme_ids.index(@theme.id)]
+    @next_id ||= @theme_ids[@theme_ids.index(@theme.id)]
+  end
+
   def edit
+    @project = @theme.project
+    @now_theme = @project.themes.order(created_at: :desc).first
   end
 
-  # POST /themes or /themes.json
   def create
-    @theme = Theme.new(theme_params)
+    @project = Project.find(params[:project_id])
+    @theme = @project.themes.new(theme_params)
 
     respond_to do |format|
-      if @theme.save
-        format.html { redirect_to theme_url(@theme), notice: "Theme was successfully created." }
+      if equal_now(@theme, @project.themes.order(created_at: :desc).first)
+        format.html { redirect_to new_project_theme_path, notice: "現在のテーマと同じです"}
+      elsif @theme.save
+        format.html { redirect_to theme_path(@theme), notice: "Theme was successfully created." }
         format.json { render :show, status: :created, location: @theme }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +45,10 @@ class ThemesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /themes/1 or /themes/1.json
   def update
     respond_to do |format|
       if @theme.update(theme_params)
-        format.html { redirect_to theme_url(@theme), notice: "Theme was successfully updated." }
+        format.html { redirect_to project_path(@theme.project.id), notice: "Theme was successfully updated." }
         format.json { render :show, status: :ok, location: @theme }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,24 +57,18 @@ class ThemesController < ApplicationController
     end
   end
 
-  # DELETE /themes/1 or /themes/1.json
-  def destroy
-    @theme.destroy
+  private
 
-    respond_to do |format|
-      format.html { redirect_to themes_url, notice: "Theme was successfully destroyed." }
-      format.json { head :no_content }
-    end
+  def set_theme
+    @theme = Theme.find(params[:id])
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_theme
-      @theme = Theme.find(params[:id])
-    end
+  def theme_params
+    params.require(:theme).permit(:first_theme, :second_theme, :third_theme)
+  end
 
-    # Only allow a list of trusted parameters through.
-    def theme_params
-      params.require(:theme).permit(:first_theme, :second_theme, :third_theme)
-    end
+  def equal_now(new, now)
+    new.first_theme == now.first_theme && new.second_theme == now.second_theme && new.third_theme == now.third_theme
+  end
+
 end

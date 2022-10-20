@@ -1,22 +1,23 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Projects</h1>
+<div class="field">
+<h1>プロジェクト　リスト</h1>
 
-<table>
+<table class="field">
   <thead>
     <tr>
-      <th>Third theme</th>
-      <th colspan="3"></th>
+      <th>タイトル</th>
+      <th colspan="2"></th>
+      <th>作成日時</th>
     </tr>
   </thead>
 
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.third_theme %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to project.title, theme_path(project.themes.order(created_at: :desc).first.id) %></td>
+        <td><%= link_to '名前を編集する', edit_project_path(project) %></td>
+        <td><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +25,6 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to '新規作成', new_project_path %>
+
+</div>

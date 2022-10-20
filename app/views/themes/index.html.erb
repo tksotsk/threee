@@ -1,14 +1,13 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Themes</h1>
-
-<table>
+<div class="field">
+<h1>履歴</h1>
+<table class="field">
   <thead>
     <tr>
-      <th>First theme</th>
-      <th>Second theme</th>
-      <th>Third theme</th>
-      <th colspan="3"></th>
+      <th>テーマ　①</th>
+      <th>テーマ　②</th>
+      <th>テーマ　③</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,9 +17,8 @@
         <td><%= theme.first_theme %></td>
         <td><%= theme.second_theme %></td>
         <td><%= theme.third_theme %></td>
-        <td><%= link_to 'Show', theme %></td>
-        <td><%= link_to 'Edit', edit_theme_path(theme) %></td>
-        <td><%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= theme.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+        <td><%= link_to '詳細', theme_path(theme) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,5 @@
 
 <br>
 
-<%= link_to 'New Theme', new_theme_path %>
+<%= link_to 'New Theme', new_project_theme_path(@project) %>
+</div>

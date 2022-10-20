@@ -1,19 +1,75 @@
-<p id="notice"><%= notice %></p>
+
+
+<div class="field center">
+  <% if @now_theme.id == @theme.id %>
+  <%= link_to '現在のテーマを変更する', new_project_theme_path(@theme.project) %>
+  <% else %>
+  <%= link_to '過去のテーマを修正する', edit_theme_path(@theme) %>
+  <% end %>
+</div>
+
+<div class="field center">
+  <h2><%= @theme.project.title %></h2>
+</div>
 
 <p>
-  <strong>First theme:</strong>
-  <%= @theme.first_theme %>
+  <div class="field center">
+    <%= @theme.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %>
+  </div>
 </p>
 
+<div class="field cenetr">
+  <% if @theme_ids_num != @theme_ids.length-1 %>
+  <%= link_to '前へ', theme_path(@back_id) %>
+  <% end %>
+  |
+  <% if @theme_ids_num != 0 %>
+  <%= link_to '次へ', theme_path(@next_id) %>
+  <% end %>
+</div>
 <p>
-  <strong>Second theme:</strong>
-  <%= @theme.second_theme %>
+  <div class="field center">
+    <%= @theme_ids_num + 1 %> / <%= @theme_ids.length%>
+    <% if @theme_ids_num == 0 %>
+    (現在)
+    <% else %>
+    (過去)
+    <% end %>
+  </div>
 </p>
 
-<p>
-  <strong>Third theme:</strong>
-  <%= @theme.third_theme %>
-</p>
+<ul>
+<li>
+<h3>
+  <div class="field center">
+    <%= @theme.first_theme %>
+  </div>
+</h3>
+</li>
 
-<%= link_to 'Edit', edit_theme_path(@theme) %> |
-<%= link_to 'Back', themes_path %>
+<li>
+<h3>
+  <div class="field center">
+    <%= @theme.second_theme %>
+  </div>
+</h3>
+</li>
+
+<li>
+<h3>
+  <div class="field cenetr">
+    <%= @theme.third_theme %>
+  </div>
+</h3>
+</li>
+
+</ul>
+
+<div class="field cenetr">
+  <%= link_to 'プロジェクトリストに戻る', projects_path %>
+</div>
+<div class="field cenetr">
+  <%= link_to '履歴', project_themes_path(@theme.project) %>
+</div>
+
+
