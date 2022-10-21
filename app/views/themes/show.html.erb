@@ -20,11 +20,11 @@
 
 <div class="field cenetr">
   <% if @theme_ids_num != @theme_ids.length-1 %>
-  <%= link_to '前へ', theme_path(@back_id) %>
+  <%= link_to '前へ', three_path(@user, @back_id) %>
   <% end %>
   |
   <% if @theme_ids_num != 0 %>
-  <%= link_to '次へ', theme_path(@next_id) %>
+  <%= link_to '次へ', three_path(@user, @next_id) %>
   <% end %>
 </div>
 <p>
@@ -66,7 +66,7 @@
 </ul>
 
 <div class="field cenetr">
-  <%= link_to 'プロジェクトリストに戻る', projects_path %>
+  <%= link_to 'プロジェクトリストに戻る',  projects_path %>
 </div>
 <div class="field cenetr">
   <%= link_to '履歴', project_themes_path(@theme.project) %>

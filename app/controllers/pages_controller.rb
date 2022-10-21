@@ -3,6 +3,11 @@ class PagesController < ApplicationController
   def top
   end
 
+  def my_page
+    @user = User.find(params[:id])
+    @projects = @user.projects.order(created_at: :desc).includes(:user, :themes)
+  end
+
   def guest_sign_in
     user = User.find_or_create_by!(name: "guest") do |user|
       user.email = "guest@example.com"
