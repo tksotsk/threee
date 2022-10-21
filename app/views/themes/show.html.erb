@@ -18,6 +18,12 @@
   </div>
 </p>
 
+<% if Favorite.exists?(user_id: @theme.project.user, project_id: @theme.project) %>
+  <%= render 'projects/non_favorite', {project: @theme.project} %>
+<% else %>
+  <%= render 'projects/favorite', {project: @theme.project} %>
+<% end %>
+
 <div class="field cenetr">
   <% if @theme_ids_num != @theme_ids.length-1 %>
   <%= link_to '前へ', three_path(@user, @back_id) %>

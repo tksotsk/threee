@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :projects, shallow: true do
     resources :themes, except: :show
   end
-      get 'user/:user_id/show/:id', to: 'themes#show', as: :three
+  get 'user/:user_id/theme/:id', to: 'themes#show', as: :three 
+  resources :favorites, only: %i[create destroy]
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
