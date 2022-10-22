@@ -1,3 +1,7 @@
-<%= link_to favorite_path(project.id), id: "fav", remote: true, method: :delete do %>
-  <h3 style="color: red;">❤</h3>
+<%= link_to favorite_path(project.id), id: "fav-#{project.id}", remote: true, method: :delete do %>
+  <p>
+    <div class="field center">
+  <h1 style="color: red;">❤</h1>
+    </div>
+  </p>
 <% end %>

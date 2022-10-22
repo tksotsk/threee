@@ -1,8 +1,8 @@
 class FavoritesController < ApplicationController
-  protect_from_forgery
   before_action :set_project, only: :destroy
   def create
     @favorite = current_user.favorites.build(project_id: params[:project_id])
+    @project = @favorite.project
     @favorite.save
   end
 

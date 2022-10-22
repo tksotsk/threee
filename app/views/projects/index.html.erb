@@ -5,8 +5,10 @@
 <table class="field">
   <thead>
     <tr>
+    <th></th>
       <th>名前</th>
       <th>タイトル</th>
+      <th>変更回数</th>
       <th>作成日時</th>
     </tr>
   </thead>
@@ -14,8 +16,20 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
+        <td>
+          <% if Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
+            <%= render 'projects/non_favorite', {project: project} %>
+          <% else %>
+            <%= render 'projects/favorite', {project: project} %>
+          <% end %>
+        </td>
         <td><%= link_to project.user.name, my_page_path(project.user) %></td>
-        <td><%= link_to project.title, three_path(project.user, project.user, project.themes.order(created_at: :desc).first.id) %></td>
+        <% if project.themes.count==0 %>
+          <td><%= link_to project.title, new_project_path %></td>
+        <% else %>
+          <td><%= link_to project.title, three_path(project.user.id, project.themes.order(created_at: :desc).first.id) %></td>
+        <% end %>
+        <td><%= project.themes.length %></td>
         <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
       </tr>
     <% end %>

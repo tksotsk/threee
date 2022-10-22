@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>タイトル</th>
-      <th colspan="2"></th>
+      <th colspan="3"></th>
       <th>作成日時</th>
     </tr>
   </thead>
@@ -14,7 +14,12 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= link_to project.title, three_path(@user, @user, project.themes.order(created_at: :desc).first.id) %></td>
+        <% if project.themes.count==0 %>
+          <td><%= link_to project.title, new_project_path %></td>
+        <% else %>
+          <td><%= link_to project.title, three_path(@user.id, project.themes.order(created_at: :desc).first.id) %></td>
+        <% end %>
+        <td><%= project.themes.length %></td>
         <td><%= link_to '名前を編集する', edit_project_path(project) %></td>
         <td><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
@@ -24,6 +29,7 @@
 </table>
 
 <br>
+
 
 <%= link_to '新規作成', new_project_path %>
 
