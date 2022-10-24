@@ -1,6 +1,14 @@
 <h2>Threee</h2>
+
 <% if user_signed_in? %>
-<p>（ログイン中）</p>
+  <% if current_user.admin %>
+  <p>（管理者権限ありでログイン中）</p>
+<% else %>
+  <p>（ログイン中）</p>
+<% end %>
+<% else %>
+  <%= link_to '一般ゲストログイン（閲覧用）', pages_guest_sign_in_path, method: :post %>|
+  <%= link_to '管理者ゲストログイン（閲覧用）', pages_admin_guest_sign_in_path, method: :post %>
 <% end %>
 <br><br><br><br>
 <p>箇条書きアプリ</p>
@@ -19,6 +27,7 @@
 
 ぜひ、このアプリケーションを使ってみてください
 </p>
+<%= link_to 'id', favorites_path %>
 
 <%= link_to 'New Project', new_project_path %>
 

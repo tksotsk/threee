@@ -1,7 +1,7 @@
 
 
 <div class="field center">
-<%= link_to '現在のテーマ', theme_path(@theme) %>
+<%= link_to '現在のテーマ', three_path(@user, @theme) %>
 </div>
 <div class="field center">
   <h2><%= @theme.project.title %></h2>
@@ -13,8 +13,7 @@
   </div>
 </p>
 <div class="field cenetr">
-  前へ|
-  次へ
+  |
 </div>
 
 

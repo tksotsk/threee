@@ -23,24 +23,21 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'letter_opener_web'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails'
+  gem 'rexml'
 end
 
 group :development do
-
   gem 'web-console', '>= 4.1.0'
-
-
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-
   gem 'spring'
 end
 
 group :test do
-
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver', '>= 4.0.0.rc1'
-
+  gem 'capybara', '>= 2.15'
+  # gem 'capybara', '>= 3.26'
   gem 'webdrivers'
 end
 

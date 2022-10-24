@@ -3,16 +3,19 @@ class ThemesController < ApplicationController
 
   def index
     @project = Project.find(params[:project_id])
+    @user = @project.user
     @themes = @project.themes.order(created_at: :desc)
   end
 
   def new
     @project = Project.find(params[:project_id])
+    @user = @project.user
     @now_theme = @project.themes.order(created_at: :desc).first
     @theme = Project.find(params[:project_id]).themes.order(created_at: :desc).first.dup
   end
 
   def show
+    @user = @theme.project.user
     @themes = @theme.project.themes.order(created_at: :desc)
     @now_theme = @themes.first
     @theme_ids = @themes.map{|t| t.id }
@@ -25,18 +28,20 @@ class ThemesController < ApplicationController
 
   def edit
     @project = @theme.project
+    @user = @project
     @now_theme = @project.themes.order(created_at: :desc).first
   end
 
   def create
     @project = Project.find(params[:project_id])
+    @user = @project.user
     @theme = @project.themes.new(theme_params)
 
     respond_to do |format|
       if equal_now(@theme, @project.themes.order(created_at: :desc).first)
         format.html { redirect_to new_project_theme_path, notice: "現在のテーマと同じです"}
       elsif @theme.save
-        format.html { redirect_to theme_path(@theme), notice: "Theme was successfully created." }
+        format.html { redirect_to three_path(@user, @theme), notice: "Theme was successfully created." }
         format.json { render :show, status: :created, location: @theme }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,9 +51,10 @@ class ThemesController < ApplicationController
   end
 
   def update
+    @user = @theme.user
     respond_to do |format|
       if @theme.update(theme_params)
-        format.html { redirect_to project_path(@theme.project.id), notice: "Theme was successfully updated." }
+        format.html { redirect_to three_path(@user, @theme), notice: "Theme was successfully updated." }
         format.json { render :show, status: :ok, location: @theme }
       else
         format.html { render :edit, status: :unprocessable_entity }

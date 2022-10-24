@@ -1,0 +1,1 @@
+$('#fav-<%= @project.id %>').replaceWith("<%= escape_javascript(render 'projects/favorite', {project: @project}) %>");

@@ -51,6 +51,18 @@ a:hover {
 }
 
 
+th, td {
+  border: thick double #dbf1f9;
+}
+
+.fav-true{
+  color: rgb(252, 85, 116);
+}
+.fav-false{
+color: rgb(236, 214, 214);
+}
+
+
 #notice {
   color: green; }
 

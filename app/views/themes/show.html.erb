@@ -1,10 +1,18 @@
 
 
 <div class="field center">
-  <% if @now_theme.id == @theme.id %>
-  <%= link_to '現在のテーマを変更する', new_project_theme_path(@theme.project) %>
+  <% if @user != current_user %>
+
+    <% if Favorite.exists?(user_id: current_user, project_id: @theme.project.id) %>
+      <%= render 'projects/non_favorite', {project: @theme.project} %>
+    <% else %>
+      <%= render 'projects/favorite', {project: @theme.project} %>
+    <% end %>
+    
+  <% elsif @now_theme.id == @theme.id %>
+    <%= link_to '現在のテーマを変更する', new_project_theme_path(@theme.project) %>
   <% else %>
-  <%= link_to '過去のテーマを修正する', edit_theme_path(@theme) %>
+    <%= link_to '過去のテーマを修正する', edit_theme_path(@theme) %>
   <% end %>
 </div>
 
@@ -20,11 +28,11 @@
 
 <div class="field cenetr">
   <% if @theme_ids_num != @theme_ids.length-1 %>
-  <%= link_to '前へ', theme_path(@back_id) %>
+  <%= link_to '前へ', three_path(@user, @back_id) %>
   <% end %>
   |
   <% if @theme_ids_num != 0 %>
-  <%= link_to '次へ', theme_path(@next_id) %>
+  <%= link_to '次へ', three_path(@user, @next_id) %>
   <% end %>
 </div>
 <p>
@@ -66,7 +74,7 @@
 </ul>
 
 <div class="field cenetr">
-  <%= link_to 'プロジェクトリストに戻る', projects_path %>
+  <%= link_to 'プロジェクトリストに戻る',  projects_path %>
 </div>
 <div class="field cenetr">
   <%= link_to '履歴', project_themes_path(@theme.project) %>

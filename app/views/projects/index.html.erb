@@ -5,8 +5,10 @@
 <table class="field">
   <thead>
     <tr>
+    <th></th>
+      <th>名前</th>
       <th>タイトル</th>
-      <th colspan="2"></th>
+      <th>変更回数</th>
       <th>作成日時</th>
     </tr>
   </thead>
@@ -14,13 +16,37 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= link_to project.title, theme_path(project.themes.order(created_at: :desc).first.id) %></td>
-        <td><%= link_to '名前を編集する', edit_project_path(project) %></td>
-        <td><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %></td>
+        <td>
+          <% if Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
+            <%= render 'projects/non_favorite', {project: project} %>
+          <% else %>
+            <%= render 'projects/favorite', {project: project} %>
+          <% end %>
+        </td>
+        <td><%= link_to project.user.name, my_page_path(project.user) %></td>
+        <td>
+          <h3>
+            <% if project.user == current_user && project.themes.count==0 %>
+              <%= link_to project.title, new_project_path %>
+            <% else %>
+              <%= link_to project.title, three_path(project.user.id, project.themes.order(created_at: :desc).first.id) %>
+            <% end %>
+          </h3>
+        </td>
+        <td><%= project.themes.length %></td>
+        <td>
+          <p>
+          【作成日時】:<%= project.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %>
+          </p>
+          <% if project.themes.length > 1 %>
+          <p>
+          【変更日時】:<%= project.themes.order(created_at: :desc).first.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H:%M:%S") %>
+          </p>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
-  </tbody>
+    </tbody>
+  <% end %>
 </table>
 
 <br>
