@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :themes, except: :show
   end
   get 'user/:user_id/theme/:id', to: 'themes#show', as: :three 
-  resources :favorites, only: %i[create destroy]
+  resources :favorites, only: %i[index create destroy]
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

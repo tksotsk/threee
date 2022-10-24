@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :themes, through: :projects
   has_many :favorites, dependent: :destroy
-  has_many :favorite_projects, through: :favorites, source: :projects
+  has_many :favorite_projects, through: :favorites, source: :project
 end

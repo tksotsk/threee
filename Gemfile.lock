@@ -321,7 +321,6 @@ DEPENDENCIES
   rexml
   rspec-rails (~> 3.8)
   sass-rails (>= 6)
-  selenium-webdriver (>= 4.0.0.rc1)
   spring
   turbolinks (~> 5)
   tzinfo-data
