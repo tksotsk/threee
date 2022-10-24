@@ -29,7 +29,7 @@
 * gem 'devise'
 
 ### カリキュラム外の技術
-* Docker
+* gem 'ransack'
 
 ### 実行手順
 下記ターミナルにて実行
