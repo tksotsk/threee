@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_q, only: [:index, :search]
 
   def index
     @projects = Project.order(created_at: :desc).includes(:user, :themes)
@@ -57,10 +58,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def set_q
+    @q = Project.ransack(params[:q])
   end
 
   def project_params

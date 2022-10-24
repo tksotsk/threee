@@ -2,9 +2,9 @@
 <div class="field">
 <h1>プロジェクト　リスト</h1>
 
-<h1>ユーザー検索</h1>
+<h3>タイトル検索</h3>
 <%= search_form_for @q, url: search_projects_path do |f| %>
-  <%= f.label :title_cont, 'ユーザー名' %>
+  <%= f.label :title_cont, 'タイトル名' %>
   <%= f.search_field :title_cont %>
   <br>
   <%= f.submit '検索' %>
@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
+    <% @results.each do |project| %>
       <tr>
         <td>
           <% if Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
