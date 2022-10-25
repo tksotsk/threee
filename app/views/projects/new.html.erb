@@ -2,7 +2,6 @@
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
       <ul>
         <% @project.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -16,35 +15,28 @@
   </div>
 
   <%= form.fields_for :themes do | form | %>
-
-
     <ul>
       <li>
-      <h3>
-        <div class="field">
-          <%= form.text_field :first_theme ,class: "theme_field first_theme", placeholder: "テーマ　①"%>
-        </div>
-      
-      </h3>
+        <h3>
+          <div class="field">
+            <%= form.text_field :first_theme ,class: "theme_field first_theme", placeholder: "テーマ　①"%>
+          </div>
+        </h3>
       </li>
-      
       <li>
-      <h3>
-        <div class="field">
-          <%= form.text_field :second_theme ,class: "theme_field second_theme", placeholder: "テーマ　②"%>
-        </div>
-      
-      </h3>
+        <h3>
+          <div class="field">
+            <%= form.text_field :second_theme ,class: "theme_field second_theme", placeholder: "テーマ　②"%>
+          </div>
+        </h3>
       </li>
-      
       <li>
-      <h3>
-        <div class="field">
-          <%= form.text_field :third_theme  ,class: "theme_field third_theme", placeholder: "テーマ　③"%>
-        </div>
-      </h3>
+        <h3>
+          <div class="field">
+            <%= form.text_field :third_theme  ,class: "theme_field third_theme", placeholder: "テーマ　③"%>
+          </div>
+        </h3>
       </li>
-      
     </ul>
   <% end %>
   <div class="actions">

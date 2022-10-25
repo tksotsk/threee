@@ -1,14 +1,10 @@
-
-
-
 <div class="field center">
-<%= link_to '現在のテーマ', three_path(@user, @now_theme) %>
+  <%= link_to '現在のテーマ', three_path(@user, @now_theme) %>
 </div>
+
 <div class="field center">
   <h2><%= @project.title %></h2>
 </div>
-
-
 
 <p>
   <div class="field center">
@@ -19,7 +15,6 @@
 <div class="field cenetr">
   |
 </div>
-
 
 <%= render 'form', {theme: @theme, project: @project} %>
 
