@@ -51,6 +51,9 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
   describe '詳細表示機能' do
     
     let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project3){FactoryBot.create(:project3, user_id: user2.id)}
+    let!(:theme3){FactoryBot.create(:theme3, project_id: project3.id)}
     let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
     let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
     let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
@@ -79,6 +82,38 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
   describe 'プロジェクト削除機能' do
     
     let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project3){FactoryBot.create(:project3, user_id: user2.id)}
+    let!(:theme3){FactoryBot.create(:theme3, project_id: project3.id)}
+    let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
+    let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
+    let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
+    let!(:theme2){FactoryBot.create(:theme2, project_id: project2.id)}
+    
+    before do
+      visit new_user_session_path
+      fill_in '名前', with: "user1"
+      fill_in 'パスワード', with: "qqqqqqqq"
+      button = find('.login')
+      button.click
+    end
+    context 'プロジェクトの削除を行った場合' do
+      it 'その削除が適用される' do
+        visit my_page_path(user1.id)
+        expect(page).to have_content "プログラミングの学習"
+        all('tbody tr')[0].click_link '削除する'
+        page.accept_confirm
+        expect(page).not_to have_content "プログラミングの学習"
+        
+      end
+    end
+  end
+  describe 'アクセス制限機能' do
+    
+    let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project3){FactoryBot.create(:project3, user_id: user2.id)}
+    let!(:theme3){FactoryBot.create(:theme3, project_id: project3.id)}
     let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
     let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
     let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
@@ -91,14 +126,63 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
       button = find('.login')
       button.click
     end
-    context '任意のタスク詳細画面に遷移した場合' do
-      it '該当タスクの内容が表示される' do
+    context '他の人のプロジェクトの編集画面に行く場合' do
+      it 'その人のマイページに遷移される' do
+        visit edit_project_path(project3)
+        expect(current_path).to eq my_page_path(user2)
+      end
+    end
+    context 'プロジェクト一覧画面とマイページから削除ボタンを探した場合' do
+      it '自分のプロジェクトの削除リンクしかない' do
+        visit projects_path
+        expect(all('tbody tr')[0]).not_to have_content '削除する'
+        expect(all('tbody tr')[1]).not_to have_content '削除する'
+        expect(all('tbody tr')[2]).not_to have_content '削除する'
         visit my_page_path(user1.id)
-        expect(page).to have_content "プログラミングの学習"
-        all('tbody tr')[0].click_link '削除する'
-        page.accept_confirm
-        expect(page).not_to have_content "プログラミングの学習"
+        expect(all('tbody tr').length).to eq 2
+        expect(all('tbody tr')[0]).to have_content project2.title
+        expect(all('tbody tr')[0]).to have_content '削除する'
+        expect(all('tbody tr')[1]).to have_content project1.title
+        expect(all('tbody tr')[1]).to have_content '削除する'
+        expect(page).not_to have_content project3.title
+      end
+    end
+  end
+  describe 'タイトル検索機能' do
+    
+    let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project3){FactoryBot.create(:project3, user_id: user2.id)}
+    let!(:theme3){FactoryBot.create(:theme3, project_id: project3.id)}
+    let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
+    let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
+    let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
+    let!(:theme2){FactoryBot.create(:theme2, project_id: project2.id)}
 
+    before do
+      visit new_user_session_path
+      fill_in '名前', with: "user1"
+      fill_in 'パスワード', with: "qqqqqqqq"
+      button = find('.login')
+      button.click
+    end
+    context 'タイトル検索フォームに入力して送信した場合' do
+      it '検索（およびあいまい検索）ができる' do
+        visit projects_path
+        expect(page).to have_content '健康'
+        expect(page).to have_content 'プログラミングの学習'
+        expect(page).to have_content 'メモを取る'
+        fill_in 'タイトル検索', with: "健康"
+        click_button '検索'
+        expect(page).to have_content '健康'
+        expect(page).not_to have_content 'プログラミングの学習'
+        expect(page).not_to have_content 'メモを取る'
+        visit projects_path
+        fill_in 'タイトル検索', with: "プロ"
+        click_button '検索'
+        expect(page).to have_content 'プログラミングの学習'
+        expect(page).not_to have_content '健康'
+        expect(page).not_to have_content 'メモを取る'
       end
     end
   end

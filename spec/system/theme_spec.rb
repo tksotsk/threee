@@ -2,6 +2,9 @@ require 'rails_helper'
 RSpec.describe 'テーマ管理機能', type: :system do
   describe 'テーマ変更機能' do
     let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project3){FactoryBot.create(:project3, user_id: user2.id)}
+    let!(:theme3){FactoryBot.create(:theme3, project_id: project3.id)}
     let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
     let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
     let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
@@ -69,6 +72,12 @@ RSpec.describe 'テーマ管理機能', type: :system do
         fill_in 'theme_second_theme', with: '夜は睡眠をしっかりとる'
         click_button '更新する'
         expect(page).to have_content "夜は睡眠をしっかりとる"
+      end
+    end
+    context '他の人のテーマの編集画面に行く場合' do
+      it 'その人のマイページに遷移される' do
+        visit edit_theme_path(theme3)
+        expect(current_path).to eq my_page_path(user2)
       end
     end
     context '一覧画面に遷移した場合' do

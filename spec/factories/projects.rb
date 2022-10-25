@@ -6,4 +6,8 @@ FactoryBot.define do
   factory :project2, class: Project do
     title { "プログラミングの学習" }
   end
+
+  factory :project3, class: Project do
+    title { "メモを取る" }
+  end
 end

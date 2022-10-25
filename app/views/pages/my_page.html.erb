@@ -3,11 +3,12 @@
   <h1><%= @user.name %>さんのプロジェクト　リスト</h1>
   
   <%= link_to 'お気に入りのプロジェクト', favorites_path %>
-  <table class="field">
+  <table class="field table-fixed">
     <thead>
       <tr>
         <th class="col-8">タイトル</th>
         <th class="col-1"></th>
+        <th></th>
         <th></th>
         <th></th>
         <th>作成日時</th>
@@ -30,7 +31,7 @@
             <p><%= link_to '名前を編集する', edit_project_path(project) %></p>
           </td>
           <td>
-            <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p><%= link_to '削除する', project, method: :delete, data: { confirm: '本当に削除しますか？' } %></p>
           </td>
           <td><%= link_to '履歴', project_themes_path(project) %></td>
           <td><%= project.themes.length %></td>

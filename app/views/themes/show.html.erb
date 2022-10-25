@@ -8,8 +8,10 @@
       <%= render 'projects/favorite', {project: @theme.project} %>
     <% end %>
   <% elsif @now_theme.id == @theme.id %>
+    <h1>👤</h1>
     <%= link_to '現在のテーマを変更する', new_project_theme_path(@theme.project) %>
   <% else %>
+    <h1 style="opacity: 0.4;">👤</h1>
     <%= link_to '過去のテーマを修正する', edit_theme_path(@theme) %>
   <% end %>
 </div>
