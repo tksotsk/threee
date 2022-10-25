@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'user/:id/my_page', to: 'pages#my_page', as: :my_page 
   resources :projects, shallow: true do
     resources :themes, except: :show
+    collection do
+      get 'search'
+    end
   end
   get 'user/:user_id/theme/:id', to: 'themes#show', as: :three 
   resources :favorites, only: %i[index create destroy]

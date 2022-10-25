@@ -18,12 +18,13 @@ gem 'rails_admin'
 gem 'cancancan'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'letter_opener_web'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', "~> 4.0.1"
   gem 'factory_bot_rails'
   gem 'rexml'
 end
