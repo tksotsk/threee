@@ -11,11 +11,11 @@ user2 = User.create({name: "佐藤二郎", email: "user2@email.com", password: "
 user3 = User.create({name: "田中三郎", email: "user3@email.com", password: "qqqqqqqq"})
 user4 = User.create({name: "いとうにしよう", email: "user4@email.com", password: "qqqqqqqq"})
 
-project1 = Project.create({title: "読書", user_id: user1.id})
-project2 = Project.create({title: "プログラミング", user_id: user1.id})
-project3 = Project.create({title: "メモの取り方", user_id: user1.id})
-project4 = Project.create({title: "音読", user_id: user2.id})
-project5 = Project.create({title: "朝の習慣", user_id: user2.id})
+project1 = Project.create({title: "読書", public: true, user_id: user1.id})
+project2 = Project.create({title: "プログラミング", public: true, user_id: user1.id})
+project3 = Project.create({title: "メモの取り方", public: false, user_id: user1.id})
+project4 = Project.create({title: "音読", public: true, user_id: user2.id})
+project5 = Project.create({title: "朝の習慣", public: true, user_id: user2.id})
 
 theme1 = Theme.create({first_theme: "集中する", second_theme: "水を飲む", third_theme: "タイプミスに気を付ける", project_id: project2.id })
 theme2 = Theme.create({first_theme: "時間をはかる", second_theme: "水を飲む", third_theme: "姿勢に気を付ける", project_id: project2.id })

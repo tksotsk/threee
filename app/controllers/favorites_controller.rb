@@ -2,6 +2,10 @@ class FavoritesController < ApplicationController
   before_action :set_project, only: :destroy
 
   def index
+    if params[:project_id]
+      @project_fav = Project.find(params[:project_id])
+      @project_fav.destroy
+    end
     @user = current_user
     @projects = @user.favorite_projects.all 
   end

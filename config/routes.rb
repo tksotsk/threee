@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     collection do
       get 'search'
     end
+    member do
+      get 'public_on', to: 'projects#public_on', as: :public_on 
+      get 'public_off', to: 'projects#public_off', as: :public_off 
+    end
   end
   get 'user/:user_id/theme/:id', to: 'themes#show', as: :three 
   resources :favorites, only: %i[index create destroy]

@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy public_on public_off]
   before_action :set_q, only: %i[index search]
   before_action :check_user, only: %i[edit update destory]
 
   def index
-    @projects = Project.order(created_at: :desc).includes(:user, :themes)
+    @projects = Project.where(public: true).order(created_at: :desc).includes(:user, :themes)
   end
 
   def show
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to  my_page_path(@project.user), notice: "タイトルが編集されました" }
         format.json { render :show, status: :ok, location: @theme }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to  edit_project_path(@project), notice: "タイトルが編集されませんでした" }
         format.json { render json: @theme.errors, status: :unprocessable_entity }
       end
     end
@@ -61,6 +61,16 @@ class ProjectsController < ApplicationController
 
   def search
     @results = @q.result
+  end
+
+  def public_on
+    @project.public = true
+    @project.save
+  end
+
+  def public_off
+    @project.public = false
+    @project.save
   end
 
   private

@@ -29,7 +29,7 @@ class ThemesController < ApplicationController
 
   def edit
     @project = @theme.project
-    @user = @project
+    @user = @project.user
     @now_theme = @project.themes.order(created_at: :desc).first
   end
 
@@ -37,6 +37,7 @@ class ThemesController < ApplicationController
     @project = Project.find(params[:project_id])
     @user = @project.user
     @theme = @project.themes.new(theme_params)
+    
 
     respond_to do |format|
       if equal_now(@theme, @project.themes.order(created_at: :desc).first)
@@ -45,7 +46,7 @@ class ThemesController < ApplicationController
         format.html { redirect_to three_path(@user, @theme), notice: "テーマが変更されました" }
         format.json { render :show, status: :created, location: @theme }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {redirect_to new_project_theme_path, notice: "テーマの変更に失敗しました" }
         format.json { render json: @theme.errors, status: :unprocessable_entity }
       end
     end

@@ -1,7 +1,6 @@
 
 <div class="field">
   <h1>プロジェクト　リスト</h1>
-  <%= link_to 'お気に入りのプロジェクト', favorites_path %>
   <%= search_form_for @q, url: search_projects_path do |f| %>
     <%= f.label :title_cont, 'タイトル検索' %>
     <%= f.search_field :title_cont, placeholder: "プロジェクトのタイトル" %>

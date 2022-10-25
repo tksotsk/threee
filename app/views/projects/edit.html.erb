@@ -1,7 +1,7 @@
 
 <div class="field">
-<h1><%= @project.user.name %>さんのプロジェクト　リスト</h1>
-<%= link_to 'みんなのプロジェクトリスト', projects_path %>
+<h1><%= @project.user.name %>さんのマイページ</h1>
+<h3><%= link_to 'お気に入りのプロジェクト', favorites_path %></h3>
 <%= form_with(model: @project) do |form| %>
 
 <table class="field table-fixed">
