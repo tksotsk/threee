@@ -1,6 +1,17 @@
 ---
 ja:
   activerecord:
+    models:
+      project: プロジェクト
+      theme: テーマ
+      user: ユーザー
+    attributes:
+      project:
+        title: タイトル
+      project/themes:
+        first_theme: 1つ目のテーマ
+        second_theme: 2つ目のテーマ
+        third_theme: 3つ目のテーマ
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

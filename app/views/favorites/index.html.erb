@@ -1,12 +1,12 @@
 
 <div class="field">
-  <h1><%= @user.name %>さんのプロジェクト　リスト</h1>
-  <%= link_to 'みんなのプロジェクトリスト', projects_path %>
+  <h1>お気に入りのプロジェクト　リスト</h1>
   <table class="field">
     <thead>
       <tr>
+        <th></th>
         <th>タイトル</th>
-        <th colspan="3"></th>
+        <th></th>
         <th>作成日時</th>
       </tr>
     </thead>
@@ -16,10 +16,12 @@
         <tr>
           
           <td>
-            <% if Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
-              <%= render 'projects/non_favorite', {project: project} %>
-            <% else %>
-              <%= render 'projects/favorite', {project: project} %>
+            <%= link_to favorites_path(project_id: project.id) do %>
+              <p>
+                <div class="field center">
+                  <h1 class="fav-true">❤</h1>
+                </div>
+              </p>
             <% end %>
           </td>
           <td>

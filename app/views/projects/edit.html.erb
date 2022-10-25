@@ -1,14 +1,15 @@
 
 <div class="field">
-<h1>Projects</h1>
-<%= link_to 'みんなのプロジェクトリスト', projects_path %>
+<h1><%= @project.user.name %>さんのマイページ</h1>
+<h3><%= link_to 'お気に入りのプロジェクト', favorites_path %></h3>
 <%= form_with(model: @project) do |form| %>
 
-<table class="field">
+<table class="field table-fixed">
   <thead>
     <tr>
       <th class="col-8">タイトル</th>
       <th class="col-1"></th>
+      <th></th>
       <th></th>
       <th></th>
       <th>作成日時</th>
@@ -27,7 +28,7 @@
               <p><%= form.submit %></p>
             </td>
             <td>
-              <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <p><%= link_to '削除する', project, method: :delete, data: { confirm: '本当に削除しますか？' } %></p>
             </td>
           </div>
         <% else %>

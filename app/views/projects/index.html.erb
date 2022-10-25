@@ -1,16 +1,14 @@
 
 <div class="field">
   <h1>プロジェクト　リスト</h1>
-  <%= link_to 'お気に入りのプロジェクト', favorites_path %>
-  <h1>ユーザー検索</h1>
   <%= search_form_for @q, url: search_projects_path do |f| %>
-    <%= f.label :title_cont, 'ユーザー名' %>
-    <%= f.search_field :title_cont %>
+    <%= f.label :title_cont, 'タイトル検索' %>
+    <%= f.search_field :title_cont, placeholder: "プロジェクトのタイトル" %>
     <br>
     <%= f.submit '検索' %>
   <% end %>
   
-  <table class="field">
+  <table class="field table-fixed">
     <thead>
       <tr>
       <th></th>

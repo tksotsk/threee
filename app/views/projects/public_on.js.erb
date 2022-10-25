@@ -1,0 +1,1 @@
+$('#pub-<%= @project.id %>').replaceWith("<%= escape_javascript(render 'projects/public', {project: @project}) %>");

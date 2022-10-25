@@ -1,5 +1,6 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: %i[ show edit update ]
+  before_action :check_user, only: %i[edit update destory]
 
   def index
     @project = Project.find(params[:project_id])
@@ -28,7 +29,7 @@ class ThemesController < ApplicationController
 
   def edit
     @project = @theme.project
-    @user = @project
+    @user = @project.user
     @now_theme = @project.themes.order(created_at: :desc).first
   end
 
@@ -36,15 +37,16 @@ class ThemesController < ApplicationController
     @project = Project.find(params[:project_id])
     @user = @project.user
     @theme = @project.themes.new(theme_params)
+    
 
     respond_to do |format|
       if equal_now(@theme, @project.themes.order(created_at: :desc).first)
         format.html { redirect_to new_project_theme_path, notice: "現在のテーマと同じです"}
       elsif @theme.save
-        format.html { redirect_to three_path(@user, @theme), notice: "Theme was successfully created." }
+        format.html { redirect_to three_path(@user, @theme), notice: "テーマが変更されました" }
         format.json { render :show, status: :created, location: @theme }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {redirect_to new_project_theme_path, notice: "テーマの変更に失敗しました" }
         format.json { render json: @theme.errors, status: :unprocessable_entity }
       end
     end
@@ -54,7 +56,7 @@ class ThemesController < ApplicationController
     @user = @theme.user
     respond_to do |format|
       if @theme.update(theme_params)
-        format.html { redirect_to three_path(@user, @theme), notice: "Theme was successfully updated." }
+        format.html { redirect_to three_path(@user, @theme), notice: "テーマが修正されました" }
         format.json { render :show, status: :ok, location: @theme }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,6 +66,12 @@ class ThemesController < ApplicationController
   end
 
   private
+
+  def check_user
+    unless @theme.project.user_id == current_user.id
+      redirect_to my_page_path(@theme.project.user_id), notice: '他のユーザーではできない処理です'
+    end
+  end
 
   def set_theme
     @theme = Theme.find(params[:id])
