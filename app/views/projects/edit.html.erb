@@ -21,26 +21,26 @@
         <% if @project.id==project.id %>
           <div class="field">
             <td>
-            <h3><%= form.text_field :title, class: "theme_field edit_form" %></h3>
+              <h3><%= form.text_field :title, class: "theme_field edit_form" %></h3>
             </td>
             <td>
-            <p><%= form.submit %></p>
+              <p><%= form.submit %></p>
             </td>
             <td>
-            <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
             </td>
           </div>
         <% else %>
           <td>
-          <h3 style="color: #bbb;">
+            <h3 style="color: #bbb;">
               <%= project.title %>
-          </h3>
+            </h3>
           </td>
           <td>
-          <p><%= link_to '名前を編集する', edit_project_path(project) %></p>
+            <p><%= link_to '名前を編集する', edit_project_path(project) %></p>
           </td>
           <td>
-          <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p><%= link_to '削除する', project, method: :delete, data: { confirm: 'Are you sure?' } %></p>
           </td>
         <% end %>
         <td><%= link_to '履歴', project_themes_path(project) %></td>

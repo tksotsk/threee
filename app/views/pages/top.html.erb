@@ -2,10 +2,10 @@
 
 <% if user_signed_in? %>
   <% if current_user.admin %>
-  <p>（管理者権限ありでログイン中）</p>
-<% else %>
-  <p>（ログイン中）</p>
-<% end %>
+    <p>（管理者権限ありでログイン中）</p>
+  <% else %>
+    <p>（ログイン中）</p>
+  <% end %>
 <% else %>
   <%= link_to '一般ゲストログイン（閲覧用）', pages_guest_sign_in_path, method: :post %>|
   <%= link_to '管理者ゲストログイン（閲覧用）', pages_admin_guest_sign_in_path, method: :post %>
@@ -27,13 +27,6 @@
 
 ぜひ、このアプリケーションを使ってみてください
 </p>
-<%= link_to 'お気に入り機能', favorites_path %>
 
 
 <%= link_to '新規作成', new_project_path, class: 'new_project' %>
-
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>

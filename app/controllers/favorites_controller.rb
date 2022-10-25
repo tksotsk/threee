@@ -1,9 +1,11 @@
 class FavoritesController < ApplicationController
   before_action :set_project, only: :destroy
+
   def index
     @user = current_user
     @projects = @user.favorite_projects.all 
   end
+  
   def create
     @favorite = current_user.favorites.build(project_id: params[:project_id])
     @project = @favorite.project

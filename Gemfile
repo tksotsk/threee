@@ -19,6 +19,8 @@ gem 'cancancan'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem 'ransack'
+gem 'dotenv-rails' 
+  gem 'unicorn'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -27,6 +29,13 @@ group :development, :test do
   gem 'rspec-rails', "~> 4.0.1"
   gem 'factory_bot_rails'
   gem 'rexml'
+  
+  gem 'capistrano', '3.16.0'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :development do

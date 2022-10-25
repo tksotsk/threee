@@ -2,13 +2,11 @@
 
 <div class="field center">
   <% if @user != current_user %>
-
     <% if Favorite.exists?(user_id: current_user, project_id: @theme.project.id) %>
       <%= render 'projects/non_favorite', {project: @theme.project} %>
     <% else %>
       <%= render 'projects/favorite', {project: @theme.project} %>
     <% end %>
-    
   <% elsif @now_theme.id == @theme.id %>
     <%= link_to '現在のテーマを変更する', new_project_theme_path(@theme.project) %>
   <% else %>
@@ -28,54 +26,55 @@
 
 <div class="field cenetr">
   <% if @theme_ids_num != @theme_ids.length-1 %>
-  <%= link_to '前へ', three_path(@user, @back_id) %>
+    <%= link_to '前へ', three_path(@user, @back_id) %>
   <% end %>
   |
   <% if @theme_ids_num != 0 %>
-  <%= link_to '次へ', three_path(@user, @next_id) %>
+    <%= link_to '次へ', three_path(@user, @next_id) %>
   <% end %>
 </div>
 <p>
   <div class="field center">
     <%= @theme_ids_num + 1 %> / <%= @theme_ids.length%>
     <% if @theme_ids_num == 0 %>
-    (現在)
+      (現在)
     <% else %>
-    (過去)
+      (過去)
     <% end %>
   </div>
 </p>
 
 <ul>
-<li>
-<h3>
-  <div class="field center">
-    <%= @theme.first_theme %>
-  </div>
-</h3>
-</li>
-
-<li>
-<h3>
-  <div class="field center">
-    <%= @theme.second_theme %>
-  </div>
-</h3>
-</li>
-
-<li>
-<h3>
-  <div class="field cenetr">
-    <%= @theme.third_theme %>
-  </div>
-</h3>
-</li>
-
+  <li>
+    <h3>
+      <div class="field center">
+        <%= @theme.first_theme %>
+      </div>
+    </h3>
+  </li>
+  
+  <li>
+    <h3>
+      <div class="field center">
+        <%= @theme.second_theme %>
+      </div>
+    </h3>
+  </li>
+  
+  <li>
+    <h3>
+      <div class="field cenetr">
+        <%= @theme.third_theme %>
+      </div>
+    </h3>
+  </li>
+  
 </ul>
 
 <div class="field cenetr">
   <%= link_to 'プロジェクトリストに戻る',  projects_path %>
 </div>
+
 <div class="field cenetr">
   <%= link_to '履歴', project_themes_path(@theme.project) %>
 </div>
