@@ -17,7 +17,7 @@
           <%= button_to "プロジェクト", projects_path, {method: :get, class: "btn btn-light"} %>
         <% if user_signed_in? %>
           <%= button_to "マイページ", my_page_path(current_user), {method: :get, class: "btn btn-light"} %>
-          <%= button_to "ログアウト", destroy_user_session_path, class: "btn btn-light", method: :delete %>
+          <%= button_to "ログアウト", destroy_user_session_path, class: "btn btn-light logout", method: :delete %>
         <% else %>
           <%= button_to "新規登録", new_user_registration_path, {method: :get, class: "btn btn-light"} %>
           <%= button_to "ログイン", new_user_session_path, {method: :get, class: "btn btn-light"} %>

@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <h2><%= form.text_field :title ,class: "theme_field", placeholder: "プロジェクト名" %></h2>
+    <h2><%= form.text_field :title ,class: "theme_field project", placeholder: "プロジェクト名" %></h2>
   </div>
 
   <%= form.fields_for :themes do | form | %>
@@ -22,7 +22,7 @@
       <li>
       <h3>
         <div class="field">
-          <%= form.text_field :first_theme ,class: "theme_field", placeholder: "テーマ　①"%>
+          <%= form.text_field :first_theme ,class: "theme_field first_theme", placeholder: "テーマ　①"%>
         </div>
       
       </h3>
@@ -31,7 +31,7 @@
       <li>
       <h3>
         <div class="field">
-          <%= form.text_field :second_theme ,class: "theme_field", placeholder: "テーマ　②"%>
+          <%= form.text_field :second_theme ,class: "theme_field second_theme", placeholder: "テーマ　②"%>
         </div>
       
       </h3>
@@ -40,7 +40,7 @@
       <li>
       <h3>
         <div class="field">
-          <%= form.text_field :third_theme  ,class: "theme_field", placeholder: "テーマ　③"%>
+          <%= form.text_field :third_theme  ,class: "theme_field third_theme", placeholder: "テーマ　③"%>
         </div>
       </h3>
       </li>

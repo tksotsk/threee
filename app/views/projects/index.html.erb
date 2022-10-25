@@ -1,7 +1,7 @@
 
 <div class="field">
 <h1>プロジェクト　リスト</h1>
-
+<%= link_to 'お気に入りのプロジェクト', favorites_path %>
 <h1>ユーザー検索</h1>
 <%= search_form_for @q, url: search_projects_path do |f| %>
   <%= f.label :title_cont, 'ユーザー名' %>
@@ -25,7 +25,10 @@
     <% @projects.each do |project| %>
       <tr>
         <td>
-          <% if Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
+          
+          <% if project.user ==current_user %>
+            <h1>👤</h1>
+          <% elsif Favorite.exists?(user_id: current_user.id, project_id: project.id) %>
             <%= render 'projects/non_favorite', {project: project} %>
           <% else %>
             <%= render 'projects/favorite', {project: project} %>
