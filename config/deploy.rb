@@ -9,7 +9,7 @@ set :application, 'threee'
 set :repo_url, 'https://github.com/tksotsk/threee'
 
 # deployするブランチ。デフォルトでmainを使用している場合、masterをmainに変更してください。
-set :branch, ENV['BRANCH'] || 'master'
+set :branch, ENV['BRANCH'] || 'main'
 
 # deploy先のディレクトリ。
 set :deploy_to, '/var/www/threee'
