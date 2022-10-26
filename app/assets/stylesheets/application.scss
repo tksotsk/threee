@@ -54,6 +54,20 @@ a:hover {
   text-decoration: none;
 }
 
+.pub-on {
+  color: rgb(0, 213, 0);
+}
+.pub-on:hover {
+  color: rgb(90, 211, 90);
+}
+
+.pub-off {
+  color: silver;
+}
+
+.pub-off:hover {
+  color: rgb(142, 140, 140);
+}
 
 th, td {
   border: thick double #dbf1f9;
