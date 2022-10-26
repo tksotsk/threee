@@ -50,7 +50,7 @@ $ rails db:seed
 ### ER図　
 [draw.ioリンク](https://app.diagrams.net/#G1pPakd0fUbVZ4UK1tV-YbZVPlK6bzi6IT)
 
-![ER図](docs/threee_er.drawio.png)
+![ER図](docs/threee_er_02.drawio.png)
 
 ### ワイヤーフレーム
 [draw.ioリンク](https://app.diagrams.net/#G1q8UaTubNaPJ16_H5tyf_LQrpzCy8IiA9)
@@ -60,4 +60,4 @@ $ rails db:seed
 
 ### 画面遷移図
 [draw.ioリンク](https://app.diagrams.net/#G1rOA4HsE6aOyyyzVkuNktfGha3Ry7KlLi)
-![画面遷移図](docs/threee_st.drawio.png)
+![画面遷移図](docs/threee_st_02.drawio.png)
