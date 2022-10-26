@@ -3,8 +3,7 @@ class FavoritesController < ApplicationController
 
   def index
     if params[:project_id]
-      @project_fav = Project.find(params[:project_id])
-      @project_fav.destroy
+      current_user.favorites.find_by(project_id: params[:project_id]).destroy!
     end
     @user = current_user
     @projects = @user.favorite_projects.all 

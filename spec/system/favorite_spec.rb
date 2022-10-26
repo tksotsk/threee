@@ -3,10 +3,10 @@ RSpec.describe 'お気に入り機能', type: :system do
   describe 'お気に入り機能（一覧画面）' do
     let!(:user1){FactoryBot.create(:user1)}
     let!(:user2){FactoryBot.create(:user2)}
-    let!(:project1){FactoryBot.create(:project1, user_id: user1.id)}
-    let!(:theme1){FactoryBot.create(:theme1, project_id: project1.id)}
-    let!(:project2){FactoryBot.create(:project2, user_id: user1.id)}
-    let!(:theme2){FactoryBot.create(:theme2, project_id: project2.id)}
+    let!(:project1_true){FactoryBot.create(:project1_true, user_id: user1.id)}
+    let!(:theme1){FactoryBot.create(:theme1, project_id: project1_true.id)}
+    let!(:project2_true){FactoryBot.create(:project2_true, user_id: user1.id)}
+    let!(:theme2){FactoryBot.create(:theme2, project_id: project2_true.id)}
     before do
       visit new_user_session_path
       fill_in '名前', with: "user2"
@@ -19,7 +19,7 @@ RSpec.describe 'お気に入り機能', type: :system do
         visit projects_path
         all('tbody tr')[1].click_link '❤'
         sleep 1.0
-        favorite = Favorite.where(user_id: user2.id, project_id: project1.id)
+        favorite = Favorite.where(user_id: user2.id, project_id: project1_true.id)
         expect(favorite.length).to eq 1
 
       end
@@ -33,7 +33,7 @@ RSpec.describe 'お気に入り機能', type: :system do
         visit projects_path
         all('tbody tr')[0].click_link '❤'
         sleep 1.0
-        favorite = Favorite.where(user_id: user2.id, project_id: project2.id)
+        favorite = Favorite.where(user_id: user2.id, project_id: project2_true.id)
         expect(favorite.length).to eq 0
       end
     end
@@ -41,11 +41,11 @@ RSpec.describe 'お気に入り機能', type: :system do
       it 'お気に入り一覧画面に追加される' do
         
         visit projects_path
-        click_link 'お気に入りのプロジェクト'
+        click_button 'お気に入りのプロジェクト'
         expect(page).not_to have_content "健康"
         visit projects_path
         all('tbody tr')[1].click_link '❤'
-        click_link 'お気に入りのプロジェクト'
+        click_button 'お気に入りのプロジェクト'
         expect(page).to have_content "健康"
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe 'お気に入り機能', type: :system do
         click_link '健康'
         click_link '❤'
         sleep 1.0
-        favorite = Favorite.where(user_id: user2.id, project_id: project1.id)
+        favorite = Favorite.where(user_id: user2.id, project_id: project1_true.id)
         expect(favorite.length).to eq 1
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe 'お気に入り機能', type: :system do
         sleep 1.0
         click_link '❤'
         sleep 1.0
-        favorite = Favorite.where(user_id: user2.id, project_id: project2.id)
+        favorite = Favorite.where(user_id: user2.id, project_id: project2_true.id)
         expect(favorite.length).to eq 0
       end
     end
