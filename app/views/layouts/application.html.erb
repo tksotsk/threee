@@ -27,14 +27,16 @@
       </div>
     </nav>
     <div class="css-body field">
+      <div class="fav-flash pub-flash">
         <% if notice %>
-          <p class="alert alert-notice"><%= notice %></p>
+          <p class="alert alert-notice" id="notice"><%= notice %></p>
         <% end %>
         <% if alert %>
-          <p class="alert alert-error"><%= alert %></p>
+          <p class="alert alert-error" id="alert"><%= alert %></p>
         <% end %>
-    <%= yield %>
-      
+      </div>
+      <%= yield %>
+        
     </div>
     <footer class="footer bg-light text-center text-lg-start">
   

@@ -1,1 +1,2 @@
 $('#fav-<%= @project.id %>').replaceWith("<%= escape_javascript(render 'projects/favorite', {project: @project}) %>");
+$('.fav-flash').replaceWith("<%= escape_javascript(render 'projects/non_fav_flash') %>");
