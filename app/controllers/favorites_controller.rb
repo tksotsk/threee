@@ -4,6 +4,7 @@ class FavoritesController < ApplicationController
   def index
     if params[:project_id]
       current_user.favorites.find_by(project_id: params[:project_id]).destroy!
+      flash.now[:notice] = "お気に入りが解除されました"
     end
     @user = current_user
     @projects = @user.favorite_projects.all 

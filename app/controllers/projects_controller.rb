@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy public_on public_off]
   before_action :set_q, only: %i[index search]
   before_action :check_user, only: %i[edit update destory]
+  skip_before_action :authenticate_user!, only: :index
 
   def index
     @projects = Project.where(public: true).order(created_at: :desc).includes(:user, :themes)
@@ -61,6 +62,7 @@ class ProjectsController < ApplicationController
 
   def search
     @results = @q.result
+    @results = @results.where(public: true).order(created_at: :desc).includes(:user, :themes)
   end
 
   def public_on

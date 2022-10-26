@@ -4,6 +4,7 @@
 <% if user_signed_in? %>
   <% if current_user.admin %>
     <p>（管理者権限ありでログイン中）</p>
+    <p><%= link_to '管理画面', rails_admin_path %></p>
   <% else %>
     <p>（ログイン中）</p>
   <% end %>
@@ -12,6 +13,7 @@
   <%= link_to '管理者ゲストログイン（閲覧用）', pages_admin_guest_sign_in_path, method: :post %>
 <% end %>
 <br>
+<div class="hov">
 <p>箇条書きアプリ</p>
 <br><br>
 
@@ -22,6 +24,8 @@
 <p>
 例えば、家事や作業、趣味など日ごろ自分が続けていることについて
 自分でテーマを設定して作業中や作業後に思い出しやすくしてくれます。
+</p>
+<p>
 テーマについて考え込むことよりも数をこなすことが重要だと考えて
 3つのテーマに制限し、ユーザーからみてシンプルな設計をめざしました。
 
@@ -30,6 +34,7 @@
 <br>
 
 <h3><%= link_to '新規作成', new_project_path, class: 'new_project' %></h3>
+</div>
 
 </div>
 

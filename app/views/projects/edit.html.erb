@@ -7,18 +7,26 @@
 <table class="field table-fixed">
   <thead>
     <tr>
-      <th class="col-8">タイトル</th>
-      <th class="col-1"></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>作成日時</th>
+        <th>公開</th>
+        <th class="col-8">タイトル</th>
+        <th class="col-1"></th>
+        <th></th>
+        <th></th>
+        <th>変更回数</th>
+        <th>作成日時</th>
     </tr>
   </thead>
 
   <tbody>
     <% @projects.each do |project| %>
       <tr>
+          <td>
+            <% if project.public %>
+              <%= render 'projects/public', {project: project} %>
+            <% else %>
+              <%= render 'projects/private', {project: project} %>
+            <% end %>
+          </td>
         <% if @project.id==project.id %>
           <div class="field">
             <td>

@@ -14,26 +14,29 @@
     <nav class="header navbar navbar-light bg-light" >
       <div class="container-fluid">
           <%= button_to "Threee", top_path, {method: :get, class: "btn btn-outline-dark"} %>
+        <% if user_signed_in? %>
           <%= button_to "お気に入りのプロジェクト", favorites_path, {method: :get, class: "btn btn-light"} %>
           <%= button_to "プロジェクト", projects_path, {method: :get, class: "btn btn-light"} %>
-        <% if user_signed_in? %>
           <%= button_to "マイページ", my_page_path(current_user), {method: :get, class: "btn btn-light"} %>
           <%= button_to "ログアウト", destroy_user_session_path, class: "btn btn-light logout", method: :delete %>
         <% else %>
+          <%= button_to "プロジェクト", projects_path, {method: :get, class: "btn btn-light"} %>
           <%= button_to "新規登録", new_user_registration_path, {method: :get, class: "btn btn-light"} %>
           <%= button_to "ログイン", new_user_session_path, {method: :get, class: "btn btn-light"} %>
         <% end %>
       </div>
     </nav>
     <div class="css-body field">
+      <div class="fav-flash pub-flash">
         <% if notice %>
-          <p class="alert alert-notice"><%= notice %></p>
+          <p class="alert alert-notice" id="notice"><%= notice %></p>
         <% end %>
         <% if alert %>
-          <p class="alert alert-error"><%= alert %></p>
+          <p class="alert alert-error" id="alert"><%= alert %></p>
         <% end %>
-    <%= yield %>
-      
+      </div>
+      <%= yield %>
+        
     </div>
     <footer class="footer bg-light text-center text-lg-start">
   

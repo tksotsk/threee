@@ -1,1 +1,2 @@
 $('#pub-<%= @project.id %>').replaceWith("<%= escape_javascript(render 'projects/private', {project: @project}) %>");
+$('.pub-flash').replaceWith("<%= escape_javascript(render 'projects/non_pub_flash') %>");
