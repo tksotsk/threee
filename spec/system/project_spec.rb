@@ -187,7 +187,7 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
       end
     end
     end
-  describe 'アクセス制限機能' do
+  describe '公開機能' do
     
     let!(:user1){FactoryBot.create(:user1)}
     let!(:user2){FactoryBot.create(:user2)}
@@ -205,18 +205,18 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
       button = find('.login')
       button.click
     end
-    context '他の人のプロジェクトの編集画面に行く場合' do
+    context 'マイページで' do
       it 'その人のマイページに遷移される' do
         visit projects_path
         expect(page).not_to have_content 'プログラミングの学習'
         expect(page).not_to have_content '健康'
         visit my_page_path(user1)
-        all('tbody tr')[0].click_link '非公開'
+        all('tbody tr')[0].click_link '公開する'
         visit projects_path
         expect(page).to have_content 'プログラミングの学習'
         expect(page).not_to have_content '健康'
         visit my_page_path(user1)
-        all('tbody tr')[1].click_link '非公開'
+        all('tbody tr')[1].click_link '公開する'
         visit projects_path
         expect(page).to have_content 'プログラミングの学習'
         expect(page).to have_content '健康'
