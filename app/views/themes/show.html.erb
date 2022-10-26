@@ -1,7 +1,8 @@
 
 
 <div class="field center">
-  <% if @user != current_user %>
+  <% if current_user == nil %>
+  <% elsif @user != current_user %>
     <% if Favorite.exists?(user_id: current_user, project_id: @theme.project.id) %>
       <%= render 'projects/non_favorite', {project: @theme.project} %>
     <% else %>
@@ -78,7 +79,9 @@
 </div>
 
 <div class="field cenetr">
+  <% unless current_user == nil %>    
   <%= link_to '履歴', project_themes_path(@theme.project) %>
+  <% end %>
 </div>
 
 

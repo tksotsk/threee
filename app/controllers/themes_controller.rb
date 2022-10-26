@@ -1,6 +1,7 @@
 class ThemesController < ApplicationController
   before_action :set_theme, only: %i[ show edit update ]
   before_action :check_user, only: %i[edit update destory]
+  skip_before_action :authenticate_user!, only: :show
 
   def index
     @project = Project.find(params[:project_id])

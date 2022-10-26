@@ -211,12 +211,12 @@ RSpec.describe 'プロジェクト管理機能', type: :system do
         expect(page).not_to have_content 'プログラミングの学習'
         expect(page).not_to have_content '健康'
         visit my_page_path(user1)
-        all('tbody tr')[0].click_link '公開する'
+        all('tbody tr')[0].click_link 'OFF'
         visit projects_path
         expect(page).to have_content 'プログラミングの学習'
         expect(page).not_to have_content '健康'
         visit my_page_path(user1)
-        all('tbody tr')[1].click_link '公開する'
+        all('tbody tr')[1].click_link 'OFF'
         visit projects_path
         expect(page).to have_content 'プログラミングの学習'
         expect(page).to have_content '健康'

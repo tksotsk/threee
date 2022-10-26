@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'ログイン機能', type: :system do
   describe 'ユーザー登録機能' do
-    context 'タスクを新規作成した場合' do
+    context 'プロジェクトを新規作成した場合' do
       it 'プロジェクトリストページに遷移できる' do
         visit new_user_registration_path
         fill_in '名前', with: "user1"
@@ -12,13 +12,43 @@ RSpec.describe 'ログイン機能', type: :system do
         expect(page).to have_content "Threee"
         expect(page).to have_content "アカウント登録が完了しました。"
       end
-      context 'ユーザがログインせずタスク一覧画面に飛ぼうとした場合' do
-        it 'ログイン画面に遷移する' do
-          visit projects_path
-        expect(page).not_to have_content "プロジェクト"
-        expect(page).to have_content "ログイン"
+    end
+  end
+  describe '非ユーザーアクセス制限機能' do
+    let!(:user1){FactoryBot.create(:user1)}
+    let!(:user2){FactoryBot.create(:user2)}
+    let!(:project1_true){FactoryBot.create(:project1_true, user_id: user1.id)}
+    let!(:theme1){FactoryBot.create(:theme1, project_id: project1_true.id)}
+    let!(:project2_true){FactoryBot.create(:project2_true, user_id: user1.id)}
+    let!(:theme2){FactoryBot.create(:theme2, project_id: project2_true.id)}
+    context 'ユーザがログインしていない場合' do
+      it 'プロジェクトリストページに遷移できる' do
+        visit projects_path
+      expect(page).not_to have_content "ログイン"
+      expect(page).to have_content "プロジェクト"
+      expect(page).to have_content "リスト"
+      expect(page).to have_content "名前"
+      expect(page).to have_content "タイトル"
+      expect(page).to have_content "作成日時"
+    end
+    context 'ユーザがログインしていない場合' do
+      it 'テーマ閲覧画面に遷移できるがマイページには遷移できない' do
+        visit projects_path
+        expect(page).to have_content "プロジェクト"
+        expect(page).to have_content "リスト"
         expect(page).to have_content "名前"
-        expect(page).to have_content "パスワード"
+        expect(page).to have_content "タイトル"
+        expect(page).to have_content "作成日時"
+        all('tbody tr')[0].click_link 'プログラミングの学習'
+        expect(page).to have_content "集中する"
+        expect(page).to have_content "落ち着く"
+        expect(page).to have_content "水分補給や食事を忘れない"
+        visit projects_path
+        all('tbody tr')[0].click_link 'user1'
+        expect(page).to have_content "ログイン"
+        visit projects_path
+        click_link '新規作成'
+        expect(page).to have_content "ログイン"
         end
       end
     end
@@ -48,9 +78,11 @@ RSpec.describe 'ログイン機能', type: :system do
       end
     end
     context 'ログインしていて、ログアウトボタンを押した場合' do
-      it '作成済みのタスク一覧が表示される' do
+      it 'トップ画面に遷移する' do
         button = find('.logout')
         button.click
+        expect(page).to have_content "Threee"
+        expect(page).to have_content "今自分が気にしているテーマを３つ箇条書きにして書く。"
       end
     end
   end
