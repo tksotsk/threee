@@ -54,7 +54,7 @@ $ rails db:seed
 
 ### ワイヤーフレーム
 [draw.ioリンク](https://app.diagrams.net/#G1q8UaTubNaPJ16_H5tyf_LQrpzCy8IiA9)
-![ワイヤーフレーム](docs/threee_wf.drawio.png)
+![ワイヤーフレーム](docs/threee_wf_02.drawio.png)
 
 
 
