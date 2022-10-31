@@ -1,3 +1,164 @@
 // Place all the styles related to the pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#content::backdrop {
+  background-color: rgb(255, 255, 255);
+}
+
+* {
+  box-sizing: border-box;
+}
+ 
+.slider {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+ 
+.slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  
+  /*
+  scroll-snap-points-x: repeat(300px);
+  scroll-snap-type: mandatory;
+  */
+}
+.slides::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.slides::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+.slides::-webkit-scrollbar-track {
+  background: transparent;
+}
+.slides > div:fullscreen:not(:focus) {
+}
+.slides > div {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 100%;
+  margin-right: 50px;
+  border-radius: 10px;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.slides > div:target {
+  // transform: scale(0.8); 
+}
+
+.slide-contents {
+}
+.slide-contents:fullscreen {
+}
+
+
+// layout
+
+.title-8 {
+  font-size: 8rem;
+}
+
+.margin-10 {
+  
+  margin-top: 0.5rem;
+}
+.title-5 {
+  font-size: 5rem;
+}
+.title-3 {
+  font-size: 3rem;
+}
+.title-2 {
+  font-size: 2rem;
+}
+
+.circle {
+  height: 60px;
+  width: 60px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  margin: 50px;
+  top: 0px; left: 0px;
+  }
+
+  .rect {
+    margin       : auto;
+    width        : 30vw;
+    height       : 30vh;
+    background   : linear-gradient(to bottom, #99ccff, #0059b3);
+  }
+
+
+  .pos0 {
+    position: absolute;
+    top: 0px; left: 0px;
+  }
+  .center {
+    transform: translate(46vw,43vh)
+  }
+
+  .tri-1 {
+    transform: translate(47vw,17vh)
+  }
+  .tri-2 {
+    transform: translate(32vw,62vh)
+  }
+  .tri-3 {
+    transform: translate(62vw,62vh)
+  }
+  .gray-b {
+    color:#bbb;
+  }
+
+  .bluegray {
+    color: midnightblue;
+  }
+
+  .blue {
+    color: blueviolet;
+  }
+
+  .green {
+    color: forestgreen;
+  }
+
+
+
+  
+// body{
+//   animation: bgchange 3s ease-out;/*変化の時間を変更したい場合は20sの部分を好きな時間に変更*/
+// }
+
+
+@keyframes move-c{
+      0%   {
+        height: 60px;
+        width: 60px;
+        transform: translate(50vw,20vh)
+      }
+      
+      100% {
+        height: 100px;
+        width: 100px;
+        transform: translate(50vw,50vh)
+      }
+}
+

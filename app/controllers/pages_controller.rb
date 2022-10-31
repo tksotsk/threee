@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!
 
   def top
   end
@@ -27,5 +28,8 @@ class PagesController < ApplicationController
     end
     sign_in user
     redirect_to root_path, notice: '管理者ゲストユーザーとしてログインしました。'
+  end
+
+  def slide
   end
 end

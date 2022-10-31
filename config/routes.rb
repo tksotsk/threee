@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     end
   end
   get 'user/:user_id/theme/:id', to: 'themes#show', as: :three 
+  get 'threee/slide', to: 'pages#slide', as: :slide 
   resources :favorites, only: %i[index create destroy]
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
