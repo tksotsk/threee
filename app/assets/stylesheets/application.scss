@@ -163,7 +163,7 @@ body, .grd{
   animation: hovchange 1s forwards ease-out;
 }
 @keyframes hovchange{
-  0%   { font-size: medium;}/*変化させたい色*/
-  100% { font-size: larger;}/*変化させたい色*/
+  0%   { font-size: medium;}
+  100% { font-size: larger;}
 }
 
